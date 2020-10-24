@@ -45,14 +45,6 @@ jobs:
         cd /opt/hostedtoolcache/go
         rm -rf /opt/hostedtoolcache/go/1.14.10
         mv 1.15.3 1.14.10    
-    - name: Apply rainbow themes
-      run: |
-        cp -f rainbow/rainbowthemes.tar.xz /opt/rt-n56u/trunk/user/www
-        cd /opt/rt-n56u/trunk/user/www
-        sudo chmod +x ./rainbowthemes.tar.xz
-        mkdir -p n56u_rainbow
-        tar -xvf rainbowthemes.tar.xz -C n56u_rainbow
-        sed -i "s/WEBUI_NAME=n56u_ribbon_fixed/WEBUI_NAME=n56u_rainbow/g" ./Makefile
     - name: Build Firmware
       env:
         TNAME: NEWIFI3
