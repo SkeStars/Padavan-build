@@ -1,4 +1,3 @@
-#修改TNAME: K2P-5.0 中的K2P-5.0为你需要编译的型号，注意名称要与configs/templates/目录下的名字相同
 name: Build Padavan
 
 on: 
@@ -36,11 +35,25 @@ jobs:
         cd /opt/rt-n56u/toolchain-mipsel
         sh dl_toolchain.sh
         mkdir -p /opt/images/
+    - name: Update v2ray
+      run: |
+        cd /opt/rt-n56u/trunk/user/v2ray
+        sed -i 's/V2ray_VERSION := 4.31.2/V2ray_VERSION := 4.31.3/g' Makefile
+        sed -i 's!https://codeload.github.com/v2ray/v2ray-core/tar.gz/v$(V2ray_VERSION)!https://codeload.github.com/v2fly/v2ray-core/tar.gz/v$(V2ray_VERSION)!g' Makefile
     - name: Set golang
       run: |
         cd /opt/hostedtoolcache/go
         rm -rf /opt/hostedtoolcache/go/1.14.10
         mv 1.15.3 1.14.10    
+    - name: Apply rainbow themes
+      if: env.APPLY_RAINBOWTHEME == 'true'
+      run: |
+        cp -f rainbow/rainbowthemes.tar.xz /opt/rt-n56u/trunk/user/www
+        cd /opt/rt-n56u/trunk/user/www
+        sudo chmod +x ./rainbowthemes.tar.xz
+        mkdir -p n56u_rainbow
+        tar -xvf rainbowthemes.tar.xz -C n56u_rainbow
+        sed -i "s/WEBUI_NAME=n56u_ribbon_fixed/WEBUI_NAME=n56u_rainbow/g" ./Makefile
     - name: Build Firmware
       env:
         TNAME: NEWIFI3
