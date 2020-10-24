@@ -46,7 +46,6 @@ jobs:
         rm -rf /opt/hostedtoolcache/go/1.14.10
         mv 1.15.3 1.14.10    
     - name: Apply rainbow themes
-      if: env.APPLY_RAINBOWTHEME == 'true'
       run: |
         cp -f rainbow/rainbowthemes.tar.xz /opt/rt-n56u/trunk/user/www
         cd /opt/rt-n56u/trunk/user/www
