@@ -38,7 +38,7 @@ jobs:
     - name: Update v2ray
       run: |
         cd /opt/rt-n56u/trunk/user/v2ray
-        sed -i 's/V2ray_VERSION := 4.31.2/V2ray_VERSION := 4.31.3/g' Makefile
+        sed -i 's/V2ray_VERSION := 4.31.2/V2ray_VERSION := 4.32.0/g' Makefile
         sed -i 's!https://codeload.github.com/v2ray/v2ray-core/tar.gz/v$(V2ray_VERSION)!https://codeload.github.com/v2fly/v2ray-core/tar.gz/v$(V2ray_VERSION)!g' Makefile
     - name: Set golang
       run: |
